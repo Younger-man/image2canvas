@@ -1,0 +1,17 @@
+{
+  "name": "image-to-canvas",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/image2canvas.js",
+  "scripts": {
+    "dev": "webpack --config webpack.config.js --verbose --process--inline",
+    "build": "webpack --config webpack.config.js --verbose --process--inline"
+  },
+  "keywords": ["image","canvas"],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
+  }
+}
