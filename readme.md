@@ -3,11 +3,11 @@
 通过canvas将图片资源和文字合成在一张图片上
 
 ### install
-        npm install image2Canvas --save
+        npm install image-compose --save
 
 ### Usage
 
-        const image2Canvas =require("image2canvas") ;
+        const image2Canvas =require("image-compose") ;
 
         image2Canvas(base,image,text,cb);
 

@@ -1,5 +1,5 @@
 {
-  "name": "image-to-canvas",
+  "name": "image-compose",
   "version": "1.0.0",
   "description": "",
   "main": "dist/image2canvas.js",
@@ -8,7 +8,7 @@
     "build": "webpack --config webpack.config.js --verbose --process--inline"
   },
   "keywords": ["image","canvas"],
-  "author": "",
+  "author": "wangmian_pawn",
   "license": "ISC",
   "devDependencies": {
     "webpack": "^4.29.6",
