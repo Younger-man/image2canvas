@@ -1,11 +1,15 @@
 {
   "name": "image-compose",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "dist/image2canvas.js",
   "scripts": {
     "dev": "webpack --config webpack.config.js --verbose --process--inline",
     "build": "webpack --config webpack.config.js --verbose --process--inline"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KonanW/image2canvas.git"
   },
   "keywords": ["image","canvas"],
   "author": "wangmian_pawn",
