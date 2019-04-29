@@ -5,17 +5,22 @@
   "main": "dist/image2canvas.js",
   "scripts": {
     "dev": "webpack --config webpack.config.js --verbose --process--inline",
-    "build": "webpack --config webpack.config.js --verbose --process--inline"
+    "build": "webpack --config webpack.config.js --verbose --process--inline",
+    "test": "jest test/spec.js"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/KonanW/image2canvas.git"
   },
-  "keywords": ["image","canvas"],
+  "keywords": [
+    "image",
+    "canvas"
+  ],
   "author": "wangmian_pawn",
   "license": "ISC",
   "devDependencies": {
+    "jest": "^20.0.4",
     "webpack": "^4.29.6",
-    "webpack-cli": "^3.3.0"
+    "webpack-cli": "^3.3.1"
   }
 }

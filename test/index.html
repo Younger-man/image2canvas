@@ -15,26 +15,22 @@
 </head>
 <body>
     <img id="img-container" src="" alt="">
+    <canvas width="100px" height="100px"></canvas>
     <!-- <div id="app">{{message}}</div> -->
 </body>
 <script>
     var base = "./img/img-poster@2x.png";
     var compose = "./img/img-wenbenkuang@2x.png";
     var qrCode = "./img/img-QRcode@2x.png";
-    window.image2canvas({
+    window.image2canvas(
+    {
         url:base,
-        width:750,
-        height:1206,
     },[{
         url:compose,
-        width:605,
-        height:636,
         sx:72,
         sy:84,
     },{
         url:qrCode,
-        width:115,
-        height:115,
         sx:322,
         sy:520,
     }],[
@@ -42,21 +38,20 @@
             content:'xxx&&在意大利的朱丽叶故居，用意大利语许下&&了2019年的第一个关于XX的愿望。',
             sx:375,
             sy:160,
-            // color:"#876746",
-            // font:"30px sans-serif",
-            lineHeight:"30",
+            color:"#876746",
+            fontSize:24,
+            lineHeight:30,
         },{
             content:"Ta的愿望守护咒语是&&'L'Amore di dio con te'",
             sx:375,
             sy:382,
-            // color:"#876746",
-            // font:"30px sans-serif",
-            lineHeight:"30",
-
         }
-    ],function(data){
+    ],1).then(function(data) {
+        // console.log(data);
         var imgContainer = document.getElementById('img-container');
         imgContainer.src = data;
+    }).catch(function(e){
+        console.log(e);
     })
     // var imgContainer = document.getElementById('img-container');
     

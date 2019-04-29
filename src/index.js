@@ -2,6 +2,7 @@
 
 /* 
     @param data: 图片资源 地址或者图片数据
+    获取图片数据
 */
 function loadImage(data){
     return new Promise((resolve,reject)=>{
@@ -14,83 +15,84 @@ function loadImage(data){
             image.onload = null;
             image.onerror = null;
         }
-        image.onload = () => {cleanup();resolve(image)}
+        image.onload = () => {cleanup();resolve({image:image,width:image.width,height:image.height})}
         image.onerror = (err) =>{cleanup();reject(err)}
         image.src = data;
     });
 }
-
+/* 
+  初始化canvas
+*/
 function createCanvas(width,height) {
     const canvas = document.createElement("canvas");
     canvas.width = width;
     canvas.height = height;
+    //getContext() 方法返回一个用于在画布上绘图的环境。 目前只支持2d
     const ctx = canvas.getContext('2d');
     // ctx.fillRect(0,0,width,height);
     // ctx.fill();
     return {canvas,ctx};
 }
 
-/* 
-    @param base :合成图片的背景图
+/*** 
+ * @param Object base:合成图片的背景图
            ｛
                 url:"",
-                width:'',
-                height:'',
             ｝
-    @param image:需要合成的图片数组
-            [
+    @param Array image:需要合成的图片数组
+            [{
                 url:"",
-                width:'',
-                height:'',
                 sx:'',
                 sy:''
+             }
             ]
-    @param  text: 需要合成的文字数组
+    @param  Array text: 需要合成的文字数组
              [
                  {
                      content:'',
                      sx:'',
                      sy:'',
                  }
-             ]   
-*/
+             ] 
+    @param  String model  ：放大倍数 建议 使用原始图
+***/
 
-module.exports = async function imageToCanvas(base,image=[],text=[],cb){
-    const {canvas,ctx} = createCanvas(base.width,base.height);
+module.exports = async function imageToCanvas(base,image=[],text=[],model=1){
+    //缩小的倍数
+    let scale = model;
     try {
         const baseImage = await loadImage(base.url);
-        ctx.drawImage(baseImage,0,0,base.width,base.height);
+        //创建初始画板的大小，
+        const {canvas,ctx} = createCanvas(baseImage.width*scale,baseImage.height*scale);
+        //绘制背景图
+        ctx.drawImage(baseImage.image,0,0,baseImage.width*scale,baseImage.height*scale);
+        //  将image数组中的图片合成
         for(index in image) {
             const composeImage = await loadImage(image[index].url);
-            ctx.drawImage(composeImage,image[index].sx,image[index].sy,image[index].width,image[index].height);
+            ctx.drawImage(composeImage.image,image[index].sx*scale,image[index].sy*scale,composeImage.width*scale,composeImage.height*scale);
         }
         ctx.textAlign = 'center';   
         ctx.textBaseline = 'top'; 
         for(index in text) {
             ctx.fillStyle = text[index].color || "black";
-            ctx.font = text[index].font || "24px sans-serif";
+            ctx.font = `${text[index].fontSize*scale}px sans-serif` || `${24*scale}px sans-serif`;
             //存在换行符
             if(/&&/.test(text[index].content)) {
                 var contentLine = text[index].content.split('&&');
-                var fontHeight = text[index].lineHeight || 30;
+                var fontHeight = text[index].lineHeight*scale || 30*scale;
                 for(line in contentLine) {
-                     var lineY = line * fontHeight + text[index].sy;
-                     ctx.fillText(contentLine[line], text[index].sx, lineY);//
+                     var lineY = line * fontHeight + text[index].sy*scale;
+                     ctx.fillText(contentLine[line], text[index].sx*scale, lineY);//
 
                 }
             }else {
-                 ctx.fillText(text[index].content, text[index].sx, text[index].sy);//
+                 ctx.fillText(text[index].content, text[index].sx*scale, text[index].sy*scale);//
             }
         }
-        cb(canvas.toDataURL("image/png"));
-        // loadImage(base.url).then((baseImage)=> {
-        //     console.log(baseImage);
-        //      ctx.drawImage(baseImage,0,0,base.width,base.height);
-        //      cb(canvas.toDataURL("image/png"));
-
-
-        // });
+        // cb(canvas.toDataURL("image/png"));
+        return canvas.toDataURL("image/png")
     }catch(e){
-        cb(e);
+        // cb(e);
+        return e
     }
 } 
