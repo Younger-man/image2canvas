@@ -24,7 +24,9 @@
     var qrCode = "./img/img-QRcode@2x.png";
     window.image2canvas(
     {
-        url:base,
+        // url:base,
+        width:750,
+        height:1206,
     },[{
         url:compose,
         sx:72,
@@ -46,7 +48,7 @@
             sx:375,
             sy:382,
         }
-    ],1).then(function(data) {
+    ]).then(function(data) {
         // console.log(data);
         var imgContainer = document.getElementById('img-container');
         imgContainer.src = data;

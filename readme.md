@@ -1,6 +1,6 @@
 #### image2Canvas
 
-通过canvas将图片资源和文字合成在一张图片上
+通过canvas将图片资源和文字合成在一张图片上，（注：本库适用将原始大小的图片合成，所以参数里面的宽高请选用图片本省的宽高。）
 
 ### install
         npm install image-compose --save
@@ -9,14 +9,14 @@
 
         const image2Canvas =require("image-compose") ;
 
-        image2Canvas(base,image,text,cb);
+        image2Canvas(base,image,text);
 
         
 ### 参数详解：
 
 | 名称 | 是否可选 | 类型 | 解释 |
 | ------| ------| ------| ----- |
-| base | 是 | Object | 合成图片的底图 |
+| base | 是| Object | 合成图片的底图，如果为空则为白底 |
 | image | 否 | Array | 需要合成的图片,其数组元素为对象 |
 | text | 否 | Array | 需要合成的文字，数组元素为对象 |
 
@@ -25,7 +25,9 @@
 #### base
 | 名称 | 是否可选 | 类型 | 解释 |
 | ------| ------| ------| ----- |
-| url | 是 | String | 合成图片的底图,可以是地址或者图片base64数据 |
+| url | 可选 | String | 合成图片的底图,可以是地址或者图片base64数据 |
+| width | 必选 | Number | 合成图片的底图宽度|
+| height | 必选 | Number | 合成图片的底图高度|
 
 
 
@@ -49,10 +51,7 @@
 | lineHeight | 可选 | String | 文字行高，default:30 |
 
 
-####  model 
-| 名称 | 是否可选 | 类型 | 解释 |
-| ------| ------| ------| ----- |
-| model | 是 | number | 放大倍数 |
+
 
 
 
@@ -66,6 +65,8 @@
 
     image2canvas({
         url:base,
+        width:750,
+        height:1206
     },[{
         url:compose,
         width:605,
@@ -91,7 +92,7 @@
             lineHeight:30,
 
         }
-    ],1).then(data => {
+    ]).then(data => {
         console.log(data)
     }).catch(err => {
         console.log(err);

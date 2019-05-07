@@ -16,10 +16,14 @@
     "image",
     "canvas"
   ],
+  "jest": {
+    "setupFiles": ["jest-canvas-mock"]
+  },
   "author": "wangmian_pawn",
   "license": "ISC",
   "devDependencies": {
     "jest": "^20.0.4",
+    "jest-canvas-mock": "^2.0.0",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.1"
   }

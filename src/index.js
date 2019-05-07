@@ -54,18 +54,20 @@ function createCanvas(width,height) {
                      sy:'',
                  }
              ] 
-    @param  String model  ：放大倍数 建议 使用原始图
 ***/
 
 module.exports = async function imageToCanvas(base,image=[],text=[],model=1){
     //缩小的倍数
     let scale = model;
     try {
-        const baseImage = await loadImage(base.url);
+       
         //创建初始画板的大小，
-        const {canvas,ctx} = createCanvas(baseImage.width*scale,baseImage.height*scale);
+        const {canvas,ctx} = createCanvas(base.width*scale,base.height*scale);
         //绘制背景图
-        ctx.drawImage(baseImage.image,0,0,baseImage.width*scale,baseImage.height*scale);
+        if(base.url){
+            const baseImage = await loadImage(base.url);
+            ctx.drawImage(baseImage.image,0,0,baseImage.width*scale,baseImage.height*scale);
+        } 
         //  将image数组中的图片合成
         for(index in image) {
             const composeImage = await loadImage(image[index].url);
@@ -90,6 +92,7 @@ module.exports = async function imageToCanvas(base,image=[],text=[],model=1){
             }
         }
         // cb(canvas.toDataURL("image/png"));
+        console.log(canvas.toDataURL("image/png"));
         return canvas.toDataURL("image/png")
     }catch(e){
         // cb(e);
