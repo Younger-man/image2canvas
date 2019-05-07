@@ -4,14 +4,14 @@
 
 #### image2Canvas
 
-通过canvas将图片资源和文字合成在一张图片上，（注：本库适用将原始大小的图片合成，所以参数里面的宽高请选用图片本省的宽高。）
+通过canvas将图片资源和文字合成在一张图片上，（注：本库适用将原始大小的图片合成，所以参数里面的宽高请选用图片本身的宽高。）
 
 ### install
         npm install image-compose --save
 
 ### Usage
 
-        const image2Canvas =require("image-compose") ;
+        import image2canvas from "image-compose";
 
         image2Canvas(base,image,text);
 
@@ -21,8 +21,8 @@
 | 名称 | 是否可选 | 类型 | 解释 |
 | ------| ------| ------| ----- |
 | base | 是| Object | 合成图片的底图，如果为空则为白底 |
-| image | 否 | Array | 需要合成的图片,其数组元素为对象 |
-| text | 否 | Array | 需要合成的文字，数组元素为对象 |
+| image | 否 | Array | 需要合成的图片,其数组元素为对象,如果没有需要合成的图片则穿空数组[] |
+| text | 否 | Array | 需要合成的文字，数组元素为对象 ,没有则穿空数组[]|
 
 
 
