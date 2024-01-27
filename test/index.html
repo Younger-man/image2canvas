@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
-    <script src="./dist/image2canvas.js"></script>
+    <script src="./lib/index.umd.js"></script>
     <style>
         img {
             width: 375px;
@@ -15,16 +15,14 @@
 </head>
 <body>
     <img id="img-container" src="" alt="">
-    <canvas width="100px" height="100px"></canvas>
-    <!-- <div id="app">{{message}}</div> -->
 </body>
 <script>
     var base = "./img/img-poster@2x.png";
     var compose = "./img/img-wenbenkuang@2x.png";
     var qrCode = "./img/img-QRcode@2x.png";
-    window.image2canvas(
+    window.$utils.imageToCanvas(
     {
-        // url:base,
+        url:base,
         width:750,
         height:1206,
     },[{
@@ -56,6 +54,6 @@
         console.log(e);
     })
     // var imgContainer = document.getElementById('img-container');
-    
+
 </script>
 </html>
