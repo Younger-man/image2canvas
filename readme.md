@@ -6,6 +6,7 @@
 
 通过canvas将图片资源和文字合成在一张图片上，（注：本库适用将原始大小的图片合成，所以参数里面的宽高请选用图片本身的宽高。）
 
+
 ### install
         npm install image-compose --save
 
@@ -15,7 +16,7 @@
 
         image2Canvas(base,image,text);
 
-        
+
 ### 参数详解：
 
 | 名称 | 是否可选 | 类型 | 解释 |
@@ -62,42 +63,53 @@
 
 
 
-###example
+### example
+
     var base = "./img/img-poster@2x.png";
     var compose = "./img/img-wenbenkuang@2x.png";
     var qrCode = "./img/img-QRcode@2x.png";
 
-    image2canvas({
-        url:base,
-        width:750,
-        height:1206
-    },[{
-        url:compose,
-        width:605,
-        height:636,
-        sx:72,
-        sy:84,
-    },{
-        url:qrCode,
-        sx:322,
-        sy:520,
-    }],[
+    image2canvas(
+      {
+        url: base,
+        width: 750,
+        height: 1206,
+      },
+      [
         {
-            content:'xxx&&在意大利的朱丽叶故居，用意大利语许下&&了2019年的第一个关于XX的愿望。',
-            sx:375,
-            sy:160,
-            color:"#876746",
-            fontSize:30,
-            lineHeight:30,
-        },{
-            content:"Ta的愿望守护咒语是&&'L'Amore di dio con te'",
-            sx:375,
-            sy:382,
-            lineHeight:30,
-
-        }
-    ]).then(data => {
-        console.log(data)
-    }).catch(err => {
+          url: compose,
+          width: 605,
+          height: 636,
+          sx: 72,
+          sy: 84,
+        },
+        {
+          url: qrCode,
+          sx: 322,
+          sy: 520,
+        },
+      ],
+      [
+        {
+          content:
+            "xxx&&在意大利的朱丽叶故居，用意大利语许下&&了2019年的第一个关于XX的愿望。",
+          sx: 375,
+          sy: 160,
+          color: "#876746",
+          fontSize: 30,
+          lineHeight: 30,
+        },
+        {
+          content: "Ta的愿望守护咒语是&&'L'Amore di dio con te'",
+          sx: 375,
+          sy: 382,
+          lineHeight: 30,
+        },
+      ],
+    )
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
         console.log(err);
-    })
+      });
